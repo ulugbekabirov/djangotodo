@@ -1,0 +1,30 @@
+<h1>This is todo page</h1>
+
+
+{%for task in tasks %}
+
+    <div>
+    {% if task.completed %}
+    <strike>{{ task.title }}</strike>
+        {% else %}
+        <span>{{ task.title }}</span>
+    {% endif %}
+    <form action="/delete/{{ task.id }}"
+          style="display: inline;"
+          method="POST"> {% csrf_token %}
+    <input type="submit" name= "delete task" value="Delete">
+    </form>
+    <form action="/update/{{ task.id }}"
+          style="display: inline;"
+          method="GET">{% csrf_token %}
+        <input type="submit" name="Edit task" value="Edit">
+    </form>
+    </div>
+
+{% endfor %}
+
+<br>
+<form action="/add" method="POST">{% csrf_token %}
+    {{ form.title }}
+    <input type="submit" value="Add task" name="Create task">
+</form>

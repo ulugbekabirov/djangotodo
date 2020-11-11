@@ -1,0 +1,7 @@
+<title>Update Task</title>
+<h1>Update {{ info }}</h1>
+<form action="/update/{{ task.id }}"
+        method="POST">{% csrf_token %}
+        {{ form }}
+    <input type="submit" name="Save task" value="Save">
+</form>
