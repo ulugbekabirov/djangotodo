@@ -3,11 +3,12 @@ from django.http import HttpResponseRedirect
 from .models import Task
 from .forms import TaskForm
 
+
 def todo_view(request):
 
     context = {"tasks": Task.objects.all(),
                'form': TaskForm()}
-    return render(request, 'todo.html', context)
+    return render(request, 'todo/index.html', context)
 
 
 def add_task(request):
@@ -34,4 +35,13 @@ def update_task(request, task_id):
         "task": task[0],
         "form": TaskForm(instance=task[0]),
     }
-    return render(request, 'update_task.html', context)
+    return render(request, 'todo/update_task.html', context)
+
+
+def delete_all(request):
+    task = Task.objects.all().delete()
+    return HttpResponseRedirect("/")
+
+def delete_completed(request):
+    task = Task.objects.filter(completed=True).delete()
+    return HttpResponseRedirect("/")
