@@ -8,6 +8,10 @@ urlpatterns = [
     path('update/<task_id>', update_task, name="update"),
     path('delete_all', delete_all, name="delete_all"),
     path('delete_completed', delete_completed, name="delete_completed"),
+
+    path('api/', TaskList.as_view(), ),
+    path('api/<int:pk>', TaskItem.as_view(), ),
+
 ]
 
 
